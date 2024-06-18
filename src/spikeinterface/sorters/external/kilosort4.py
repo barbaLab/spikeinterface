@@ -199,7 +199,7 @@ class Kilosort4Sorter(BaseSorter):
         filename, data_dir, results_dir, probe = set_files(settings, filename, probe, probe_name, data_dir, results_dir)
         ops = initialize_ops(settings, probe, recording.get_dtype(), do_CAR, invert_sign, device, save_preprocessed_copy)
 
-        n_chan_bin, fs, NT, nt, twav_min, chan_map, dtype, do_CAR, invert, _, _, tmin, tmax, artifact = (
+        n_chan_bin, fs, NT, nt, twav_min, chan_map, dtype, do_CAR, invert, _, _, tmin, tmax, artifact, shift, scale = (
             get_run_parameters(ops)
         )
         # Set preprocessing and drift correction parameters
@@ -223,6 +223,8 @@ class Kilosort4Sorter(BaseSorter):
                 tmin=tmin,
                 tmax=tmax,
                 artifact_threshold=artifact,
+                shift=shift,
+                scale=scale,
                 file_object=file_object,
             )
             ops["preprocessing"] = dict(hp_filter=None, whiten_mat=None)
